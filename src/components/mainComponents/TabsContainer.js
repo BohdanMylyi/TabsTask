@@ -8,6 +8,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Tab from "./TabItem";
+import "../../styles/TabsContainer.css";
 
 const initialTabsData = [
   { label: "Dashboard", path: "/", pinned: false },
@@ -37,7 +38,7 @@ const TabsContainer = () => {
   const visibleTabsCount = isExtraSmall
     ? 1
     : isSmall
-    ? 4
+    ? 3
     : isMedium
     ? 6
     : isExtraLarge
@@ -117,37 +118,14 @@ const TabsContainer = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        overflowX: "hidden",
-      }}
-    >
+    <Box className="tabs-container">
       <Tabs
         indicatorColor="primary"
         textColor="primary"
         centered
-        sx={{
-          backgroundColor: "#FEFEFE",
-          height: "50px",
-          width: "100%",
-          overflow: "hidden",
-          marginBottom: 0,
-        }}
+        className="tabs-header"
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "48px",
-            width: "50px",
-            marginLeft: "62px",
-            marginRight: "16px",
-          }}
-        >
+        <Box className="pinned-icon">
           <img src={require("../../icons/pinned.png")} alt="Icon Pinned" />
         </Box>
         {tabsData.slice(0, visibleTabsCount).map((tab, index) => (
@@ -164,25 +142,13 @@ const TabsContainer = () => {
         ))}
       </Tabs>
       {overflowTabs.length > 0 && (
-        <FormControl
-          variant="standard"
-          sx={{
-            height: "50px",
-            width: "100px",
-            ml: "10px",
-            borderRadius: "6px",
-          }}
-        >
+        <FormControl variant="standard" className="dropdown-container">
           <Select
             labelId="overflow-tabs-label"
             onChange={handleDropdownChange}
             displayEmpty
             defaultValue=""
-            sx={{
-              height: "50px",
-              width: "100%",
-              backgroundColor: "#4690E2",
-            }}
+            className="dropdown-select"
           >
             {overflowTabs.map((tab) => (
               <MenuItem key={tab.label} value={tab.label}>

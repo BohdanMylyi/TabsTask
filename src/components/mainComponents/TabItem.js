@@ -11,8 +11,10 @@ import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import HelpIcon from "@mui/icons-material/Help";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import LoyaltyIcon from '@mui/icons-material/Loyalty';
-import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
+
+import "../../styles/TabItem.css";
 
 const getIconForTab = (label) => {
   switch (label) {
@@ -63,18 +65,16 @@ const TabItem = ({
   const isSelected = location.pathname === tab.path;
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", height: "50px" }}>
+    <Box className="tab-item-container">
       <Tab
         label={
-          <Box
-            sx={{ display: "flex", alignItems: "center", maxWidth: "250px" }}
-          >
-            <Box sx={{ marginRight: 1 }}>{getIconForTab(tab.label)}</Box>
+          <Box className="tab-content">
+            <Box className="tab-icon">{getIconForTab(tab.label)}</Box>
             {tab.label}
             <IconButton
               size="small"
               onClick={() => onTogglePin(index)}
-              sx={{ marginLeft: 1 }}
+              className="tab-icon-button"
             >
               {tab.pinned ? (
                 <UnpinIcon fontSize="small" />
@@ -85,7 +85,7 @@ const TabItem = ({
             <IconButton
               size="small"
               onClick={() => onDelete(index)}
-              sx={{ marginLeft: 1 }}
+              className="tab-icon-button"
             >
               <DeleteIcon fontSize="small" />
             </IconButton>
@@ -99,15 +99,9 @@ const TabItem = ({
         onDragEnd={handleDragEnd}
         onDragOver={onDragOver}
         onDrop={(ev) => onDrop(ev, index)}
-        sx={{
-          backgroundColor: isDragging
-            ? "#7F858D"
-            : isSelected
-            ? "#F1F5F8"
-            : "transparent",
-          borderTop: isSelected ? "2px solid #4690E2" : "none",
-          transition: "background-color 0.2s, border-top 0.2s",
-        }}
+        className={`${isDragging ? "tab-dragging" : ""} ${
+          isSelected ? "tab-selected" : ""
+        } tab-transition`}
       />
     </Box>
   );

@@ -1,0 +1,38 @@
+.tabs-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: hidden;
+  }
+  
+  .tabs-header {
+    background-color: #FEFEFE;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  
+  .pinned-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 50px;
+    margin-left: 62px;
+    margin-right: 16px;
+  }
+  
+  .dropdown-container {
+    height: 50px;
+    width: 100px;
+    margin-left: 10px;
+    border-radius: 6px;
+  }
+  
+  .dropdown-select {
+    height: 50px;
+    width: 100%;
+    background-color: #4690E2;
+  }
+  
