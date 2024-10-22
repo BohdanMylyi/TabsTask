@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Box } from "@mui/material";
 import TabsContainer from "./components/mainComponents/TabsContainer";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import Dashboard from "./components/routePages/Dashboard";
 import Banking from "./components/routePages/Banking";
@@ -13,8 +14,11 @@ import PostOffice from "./components/routePages/PostOffice";
 import Verkauf from "./components/routePages/Verkauf";
 import Help from "./components/routePages/Help";
 
+const theme = createTheme()
+
 const App = () => {
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <Box sx={{ width: "100vw", marginTop: '68px' }}>
         <TabsContainer />
@@ -31,6 +35,7 @@ const App = () => {
         </Routes>
       </Box>
     </Router>
+    </ThemeProvider>
   );
 };
 

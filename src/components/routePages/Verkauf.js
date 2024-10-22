@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
+import PagesBody from "../routePages/PagesBody";
 
-const Vercauf = () => <div>Vercauf Content</div>;
+const Vercauf = () => <PagesBody />;
 
 export default Vercauf;

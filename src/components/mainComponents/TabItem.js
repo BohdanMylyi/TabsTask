@@ -9,6 +9,9 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import HelpIcon from "@mui/icons-material/Help";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 
 const getIconForTab = (label) => {
   switch (label) {
@@ -24,6 +27,12 @@ const getIconForTab = (label) => {
       return <ContactPhoneIcon />;
     case "Administration":
       return <AdminPanelSettingsIcon />;
+    case "Accounting":
+      return <GroupAddIcon />;
+    case "Verkauf":
+      return <LoyaltyIcon />;
+    case "Post Office":
+      return <LocalPostOfficeIcon />
     default:
       return null;
   }
@@ -51,11 +60,15 @@ const TabItem = ({
 
   const isSelected = location.pathname === tab.path;
 
+  const transitionLines = 10;
+
   return (
-    <Box sx={{ display: "flex", alignItems: "center", height: '50px' }}>
+    <Box sx={{ display: "flex", alignItems: "center", height: "50px" }}>
       <Tab
         label={
-          <Box sx={{ display: "flex", alignItems: "center", maxwidth: "144px" }}>
+          <Box
+            sx={{ display: "flex", alignItems: "center", maxwidth: "144px" }}
+          >
             <Box sx={{ marginRight: 1 }}>{getIconForTab(tab.label)}</Box>
             {tab.label}
             <IconButton
@@ -89,7 +102,7 @@ const TabItem = ({
           transition: "background-color 0.2s, border-top 0.2s",
         }}
       />
-      {index < 6 && (
+      {index < transitionLines && (
         <Box
           sx={{
             width: "16px",
