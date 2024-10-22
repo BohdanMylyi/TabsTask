@@ -60,7 +60,7 @@ const TabItem = ({
 
   const isSelected = location.pathname === tab.path;
 
-  const transitionLines = 10;
+  const transitionLines = 8;
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", height: "50px" }}>

@@ -30,7 +30,7 @@ const isSmall = useMediaQuery((theme) => theme.breakpoints.between("sm", "md"));
 const isMedium = useMediaQuery((theme) => theme.breakpoints.between("md", "xl"));
 const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
 
-  const visibleTabsCount = isExtraSmall ? 4 : isSmall ? 5 : isMedium ? 6 : isExtraLarge ? 9 : 10;
+  const visibleTabsCount = isExtraSmall ? 1 : isSmall ? 4 : isMedium ? 6 : isExtraLarge ? 7 : 10;
 
   useEffect(() => {
     const storedTabs = localStorage.getItem("tabsOrder");
@@ -98,7 +98,7 @@ const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", overflowX: 'hidden'}}>
       <Tabs
         indicatorColor="primary"
         textColor="primary"
@@ -118,6 +118,7 @@ const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
             alignItems: "center",
             height: "48px",
             width: "50px",
+            marginLeft: '62px',
           }}
         >
           <img src={require("../../icons/pinned.png")} alt="Icon Pinned" />

@@ -20,7 +20,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
     <Router>
-      <Box sx={{ width: "100vw", marginTop: '68px' }}>
+      <Box sx={{ width: "100%", marginTop: '68px', overflow: 'hidden'}}>
         <TabsContainer />
         <Routes>
           <Route path="/" element={<Dashboard />} />
