@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { Tabs, Tab, Box } from '@mui/material';
 import Dashboard from './components/Dashboard';
@@ -20,6 +20,17 @@ const initialTabsData = [
 const App = () => {
   const [tabsData, setTabsData] = useState(initialTabsData);
 
+  useEffect(() => {
+    const storedTabs = localStorage.getItem('tabsOrder');
+    if (storedTabs) {
+      setTabsData(JSON.parse(storedTabs));
+    }
+  }, []);
+
+  const updateLocalStorage = (newTabs) => {
+    localStorage.setItem('tabsOrder', JSON.stringify(newTabs));
+  };
+
   const dragStartHandler = (ev, index) => {
     ev.dataTransfer.setData("text/plain", index);
   };
@@ -37,7 +48,9 @@ const App = () => {
       const updatedTabs = [...tabsData];
       const [draggedTab] = updatedTabs.splice(draggedIndex, 1);
       updatedTabs.splice(index, 0, draggedTab);
+      
       setTabsData(updatedTabs);
+      updateLocalStorage(updatedTabs);
     }
   };
 
