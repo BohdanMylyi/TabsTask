@@ -3,6 +3,7 @@ import { Tab, Box, IconButton } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import PinIcon from "@mui/icons-material/PushPin";
 import UnpinIcon from "@mui/icons-material/PushPinOutlined";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
@@ -32,7 +33,7 @@ const getIconForTab = (label) => {
     case "Verkauf":
       return <LoyaltyIcon />;
     case "Post Office":
-      return <LocalPostOfficeIcon />
+      return <LocalPostOfficeIcon />;
     default:
       return null;
   }
@@ -45,6 +46,7 @@ const TabItem = ({
   onDragStart,
   onDragOver,
   onDrop,
+  onDelete,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const location = useLocation();
@@ -60,14 +62,12 @@ const TabItem = ({
 
   const isSelected = location.pathname === tab.path;
 
-  const transitionLines = 8;
-
   return (
     <Box sx={{ display: "flex", alignItems: "center", height: "50px" }}>
       <Tab
         label={
           <Box
-            sx={{ display: "flex", alignItems: "center", maxwidth: "144px" }}
+            sx={{ display: "flex", alignItems: "center", maxWidth: "250px" }}
           >
             <Box sx={{ marginRight: 1 }}>{getIconForTab(tab.label)}</Box>
             {tab.label}
@@ -81,6 +81,13 @@ const TabItem = ({
               ) : (
                 <PinIcon fontSize="small" />
               )}
+            </IconButton>
+            <IconButton
+              size="small"
+              onClick={() => onDelete(index)}
+              sx={{ marginLeft: 1 }}
+            >
+              <DeleteIcon fontSize="small" />
             </IconButton>
           </Box>
         }
@@ -102,16 +109,6 @@ const TabItem = ({
           transition: "background-color 0.2s, border-top 0.2s",
         }}
       />
-      {index < transitionLines && (
-        <Box
-          sx={{
-            width: "16px",
-            height: "0px",
-            border: "1px solid rgba(0, 0, 0, 0.12)",
-            transform: "rotate(-90deg)",
-          }}
-        />
-      )}
     </Box>
   );
 };

@@ -12,10 +12,10 @@ import Tab from "./TabItem";
 const initialTabsData = [
   { label: "Dashboard", path: "/", pinned: false },
   { label: "Banking", path: "/banking", pinned: false },
-  { label: "Statistics", path: "/statistics", pinned: false },
+  { label: "Stats", path: "/statistics", pinned: false },
   { label: "Help", path: "/help", pinned: false },
   { label: "Phone", path: "/phone", pinned: false },
-  { label: "Administration", path: "/administration", pinned: false },
+  { label: "Admin", path: "/administration", pinned: false },
   { label: "Accounting", path: "/accounting", pinned: false },
   { label: "Post Office", path: "/post-office", pinned: false },
   { label: "Verkauf", path: "/verkauf", pinned: false },
@@ -26,11 +26,23 @@ const TabsContainer = () => {
   const [overflowTabs, setOverflowTabs] = useState([]);
 
   const isExtraSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-const isSmall = useMediaQuery((theme) => theme.breakpoints.between("sm", "md"));
-const isMedium = useMediaQuery((theme) => theme.breakpoints.between("md", "xl"));
-const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
+  const isSmall = useMediaQuery((theme) =>
+    theme.breakpoints.between("sm", "md")
+  );
+  const isMedium = useMediaQuery((theme) =>
+    theme.breakpoints.between("md", "xl")
+  );
+  const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
 
-  const visibleTabsCount = isExtraSmall ? 1 : isSmall ? 4 : isMedium ? 6 : isExtraLarge ? 7 : 10;
+  const visibleTabsCount = isExtraSmall
+    ? 1
+    : isSmall
+    ? 4
+    : isMedium
+    ? 6
+    : isExtraLarge
+    ? 7
+    : 10;
 
   useEffect(() => {
     const storedTabs = localStorage.getItem("tabsOrder");
@@ -88,6 +100,13 @@ const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
     updateLocalStorage(updatedTabs);
   };
 
+  const deleteTab = (index) => {
+    const updatedTabs = [...tabsData];
+    updatedTabs.splice(index, 1);
+    setTabsData(updatedTabs);
+    updateLocalStorage(updatedTabs);
+  };
+
   const handleDropdownChange = (event) => {
     const selectedTab = tabsData.find(
       (tab) => tab.label === event.target.value
@@ -98,7 +117,14 @@ const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", overflowX: 'hidden'}}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        overflowX: "hidden",
+      }}
+    >
       <Tabs
         indicatorColor="primary"
         textColor="primary"
@@ -118,7 +144,8 @@ const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
             alignItems: "center",
             height: "48px",
             width: "50px",
-            marginLeft: '62px',
+            marginLeft: "62px",
+            marginRight: "16px",
           }}
         >
           <img src={require("../../icons/pinned.png")} alt="Icon Pinned" />
@@ -132,20 +159,29 @@ const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up("xl"));
             onDragStart={dragStartHandler}
             onDragOver={dragOverHandler}
             onDrop={dropHandler}
+            onDelete={deleteTab}
           />
         ))}
       </Tabs>
       {overflowTabs.length > 0 && (
-        <FormControl variant="standard" sx={{ height: '50px', width: '100px', ml: '10px' }}>
+        <FormControl
+          variant="standard"
+          sx={{
+            height: "50px",
+            width: "100px",
+            ml: "10px",
+            borderRadius: "6px",
+          }}
+        >
           <Select
             labelId="overflow-tabs-label"
             onChange={handleDropdownChange}
             displayEmpty
             defaultValue=""
             sx={{
-              height: '50px',
-              width: '100%',
-              backgroundColor: '#4690E2',
+              height: "50px",
+              width: "100%",
+              backgroundColor: "#4690E2",
             }}
           >
             {overflowTabs.map((tab) => (
